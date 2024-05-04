@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="/spy-list.css" type="text/css" />
+        <title>Spy List</title>
+    </head>
+    <body>
+        <div class="table-data">
+            <table>
+                <tr>
+                    <th>记录ID</th>
+                    <th>目标</th>
+                    <th>目标等级</th>
+                    <th>BS</th>
+                    <th>上传者</th>
+                    <th>上传方式</th>
+                    <th>上传时间</th>
+                    <th>Log ID</th>
+                </tr>
+                <% if (spyData.length !== 0) { %> <% spyData.forEach(function(data, index) { %>
+                <tr>
+                    <td><%= data.id %></td>
+                    <td><a href="<%= `https://cartelempire.online/user/${data.targetId}` %>" target="_blank"><%= data.targetName + " [" + data.targetId + "]" %></a></td>
+                    <td><%= data.level %></td>
+                    <td><%= data.bs %></td>
+                    <td><a href="<%= `https://cartelempire.online/user/${data.reporterId}` %>" target="_blank"><%= data.reporterName + " [" + data.reporterId + "]" %></a></td>
+                    <td><%= data.reportSource %></td>
+                    <td><%= new Date(Number(data.reportTimestamp)).toLocaleString() %></td>
+                    <td>
+                        <% if(data.logId.length < 10){ %>
+                        <a href="<%= `https://cartelempire.online/Fight/${data.logId}` %>" target="_blank"><%=data.logId%></a>
+                        <% } else{ %> / <% } %>
+                    </td>
+                </tr>
+                <% }); %> <% } else { %>
+                <tr>
+                    <td colspan="7">No Data Found</td>
+                </tr>
+                <% } %>
+            </table>
+        </div>
+    </body>
+</html>
